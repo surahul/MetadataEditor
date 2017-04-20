@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/folder_name_text_input_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/folder_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_vertical"
+        android:hint="Folder Name"
+        android:inputType="textNoSuggestions"
+        android:selectAllOnFocus="true"
+        android:text="@string/new_folder"
+        android:textColor="#ff000000"
+        android:textColorHint="#66000000"
+        android:textSize="17.0dip" />
+
+</android.support.design.widget.TextInputLayout>

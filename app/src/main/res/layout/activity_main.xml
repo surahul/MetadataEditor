@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    tools:context="varunest.com.metadataeditor.MainActivity">
+
+    <ScrollView
+        android:id="@+id/info_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--ALBUM COVER-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/audio_cover"
+                    android:layout_width="100dp"
+                    android:layout_height="200dp"
+                    android:layout_weight=".7"
+                    android:ellipsize="end"
+                    android:scaleType="centerCrop"
+                    android:singleLine="true"
+                    android:src="@drawable/placeholder" />
+            </LinearLayout>
+
+            <!--TITLE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:text="Name"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/audio_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".7"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <!--ARTIST NAME-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:text="Artist"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/audio_artist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:layout_weight=".7"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <!--ALBUM NAME-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:text="Album"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/audio_album"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:layout_weight=".7"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+
+            <!--ALBUM ARTIST-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:text="Album Artist"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/audio_album_artist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:layout_weight=".7"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+
+            <!--YEAR-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:text="Year"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/audio_year"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:inputType="number"
+                    android:layout_weight=".7"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+
+            <!--GENRE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:text="Genre"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/audio_genre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:layout_weight=".7"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/no_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="No Audio File Selected"
+            android:textAlignment="center"
+            android:textColor="#8f8f8f"
+            android:textSize="40dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1e1e1e"
+        android:paddingBottom="15dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/pick_audio_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Choose audio file" />
+        <Button
+            android:id="@+id/save_meta_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:visibility="gone"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Save Modified Meta" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
