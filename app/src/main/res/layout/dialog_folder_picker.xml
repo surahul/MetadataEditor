@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#707070"
+    android:background="#000000"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
@@ -43,40 +43,6 @@
     </FrameLayout>
 
 
-    <LinearLayout
-        android:id="@+id/path_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@+id/top_bar_house"
-        android:background="#afafaf"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/up_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="4dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_action_navigation_arrow_back" />
-
-        <HorizontalScrollView
-            android:id="@+id/current_folder_hsv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:id="@+id/current_directory_house"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingRight="10dp" />
-
-        </HorizontalScrollView>
-
-    </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="7dp"
@@ -90,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:background="#acacac"
+        android:background="#1b1b1b"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp">
@@ -100,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="?android:attr/textColorSecondaryInverse"
             android:textSize="14dp"
             tools:text="20 MB FREE / 2 GB" />
 
@@ -130,6 +96,42 @@
             android:textSize="14dp"
             android:textStyle="bold" />
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/path_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#1b1b1b"
+        android:orientation="horizontal"
+        android:layout_below="@+id/top_bar_house"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/up_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_action_navigation_arrow_back" />
+
+        <HorizontalScrollView
+            android:id="@+id/current_folder_hsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/current_directory_house"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingRight="10dp" />
+
+        </HorizontalScrollView>
 
     </LinearLayout>
 

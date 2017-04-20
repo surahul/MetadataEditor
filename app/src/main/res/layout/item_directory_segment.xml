@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/indicator"
         android:fontFamily="sans-serif"
-        android:textColor="?android:textColorPrimary"
+        android:textColor="?android:textColorPrimaryInverse"
         android:textSize="15.0dip" />
 
 </LinearLayout>

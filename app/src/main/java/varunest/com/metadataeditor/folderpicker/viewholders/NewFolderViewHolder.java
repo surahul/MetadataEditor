@@ -1,14 +1,13 @@
 package varunest.com.metadataeditor.folderpicker.viewholders;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.support.annotation.AttrRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import varunest.com.metadataeditor.R;
 import varunest.com.metadataeditor.folderpicker.FileListAdapter;
+
+import static com.afollestad.materialdialogs.util.DialogUtils.resolveColor;
 
 public class NewFolderViewHolder extends RecyclerView.ViewHolder{
 
@@ -35,13 +34,4 @@ public class NewFolderViewHolder extends RecyclerView.ViewHolder{
             listener.onNewFolderClicked();
         }
     };
-
-    public static int resolveColor(Context context, @AttrRes int attr, int fallback) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
-        try {
-            return a.getColor(0, fallback);
-        } finally {
-            a.recycle();
-        }
-    }
 }

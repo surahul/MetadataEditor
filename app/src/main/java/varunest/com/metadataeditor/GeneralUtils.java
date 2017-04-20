@@ -1,6 +1,10 @@
 package varunest.com.metadataeditor;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.AttrRes;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -71,4 +75,32 @@ public class GeneralUtils {
             e.printStackTrace();
         }
     }
+
+    public static int resolveColor(Context context, @AttrRes int attr, int fallback) {
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        try {
+            return a.getColor(0, fallback);
+        } finally {
+            a.recycle();
+        }
+    }
+
+    public static void setBackgroundDrawable(View v, Drawable drawable) {
+        if (v != null) {
+            int paddingLeft = v.getPaddingLeft();
+            int paddingTop = v.getPaddingTop();
+            int paddingRight = v.getPaddingRight();
+            int paddingBottom = v.getPaddingBottom();
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+                v.setBackgroundDrawable(drawable);
+            else
+                v.setBackground(drawable);
+
+            v.setPadding(paddingLeft,
+                    paddingTop,
+                    paddingRight,
+                    paddingBottom);
+        }
+    }
+
 }

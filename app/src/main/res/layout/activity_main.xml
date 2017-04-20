@@ -4,8 +4,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#000000"
+    android:orientation="vertical"
     tools:context="varunest.com.metadataeditor.MainActivity">
 
     <ScrollView
@@ -21,20 +21,34 @@
             android:orientation="vertical">
 
             <!--ALBUM COVER-->
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <ImageView
                     android:id="@+id/audio_cover"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_weight=".7"
                     android:ellipsize="end"
                     android:scaleType="centerCrop"
                     android:singleLine="true"
                     android:src="@drawable/placeholder" />
-            </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/album_change_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/image_overlay_button"
+                    android:layout_gravity="top|right"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/change"
+                    android:textColor="@android:color/white" />
+            </FrameLayout>
 
             <!--TITLE-->
             <LinearLayout
@@ -48,20 +62,20 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:layout_weight=".4"
                     android:text="Name"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
                     android:textSize="18dp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/audio_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".7"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:layout_weight=".6"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
             </LinearLayout>
 
             <!--ARTIST NAME-->
@@ -76,20 +90,20 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:layout_weight=".4"
                     android:text="Artist"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
                     android:textSize="18dp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/audio_artist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
-                    android:layout_weight=".7"
+                    android:layout_weight=".6"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
             </LinearLayout>
 
             <!--ALBUM NAME-->
@@ -104,20 +118,20 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:layout_weight=".4"
                     android:text="Album"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
                     android:textSize="18dp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/audio_album"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
-                    android:layout_weight=".7"
+                    android:layout_weight=".6"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
             </LinearLayout>
 
 
@@ -133,20 +147,20 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:layout_weight=".4"
                     android:text="Album Artist"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
                     android:textSize="18dp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/audio_album_artist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
-                    android:layout_weight=".7"
+                    android:layout_weight=".6"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
             </LinearLayout>
 
 
@@ -162,21 +176,21 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:layout_weight=".4"
                     android:text="Year"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
                     android:textSize="18dp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/audio_year"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
-                    android:inputType="number"
-                    android:layout_weight=".7"
+                    android:layout_weight=".6"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
             </LinearLayout>
 
 
@@ -192,20 +206,20 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:textColor="?android:attr/textColorSecondaryInverse"
+                    android:layout_weight=".4"
                     android:text="Genre"
+                    android:textColor="?android:attr/textColorSecondaryInverse"
                     android:textSize="18dp" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/audio_genre"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
-                    android:layout_weight=".7"
+                    android:layout_weight=".6"
                     android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
             </LinearLayout>
 
         </LinearLayout>
@@ -234,11 +248,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1e1e1e"
+        android:orientation="horizontal"
         android:paddingBottom="15dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="15dp"
-        android:orientation="horizontal">
+        android:paddingTop="15dp">
 
         <Button
             android:id="@+id/pick_audio_button"
@@ -246,15 +260,16 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:text="Choose audio file" />
+
         <Button
             android:id="@+id/save_meta_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:visibility="gone"
-            android:textColor="@android:color/white"
             android:backgroundTint="@color/colorAccent"
-            android:text="Save Modified Meta" />
+            android:text="Save Modified Meta"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
 
     </LinearLayout>

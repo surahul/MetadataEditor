@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         pickAudioButton.setOnClickListener(this);
         saveMetaButton.setOnClickListener(this);
-        albumCover.setOnClickListener(this);
+        findViewById(R.id.album_change_button).setOnClickListener(this);
     }
 
     private void loadMetaDetailsInUI() {
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.audio_cover:
+            case R.id.album_change_button:
                 ImagePicker.create(this)
                         .returnAfterFirst(true) // set whether pick or camera action should return immediate result or not. For pick image only work on single mode
                         .folderMode(true) // folder mode (false by default)

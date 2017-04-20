@@ -30,8 +30,10 @@ import java.util.List;
 
 import android_file.io.File;
 import android_file.io.storage.StorageItem;
+import varunest.com.metadataeditor.ATHUtil;
 import varunest.com.metadataeditor.GeneralUtils;
 import varunest.com.metadataeditor.R;
+import varunest.com.metadataeditor.TintHelper;
 
 class FolderPickerDialogHelper implements View.OnClickListener, FolderStateManager.Listener {
     private DialogFragment dialogFragment;
@@ -342,6 +344,7 @@ class FolderPickerDialogHelper implements View.OnClickListener, FolderStateManag
         View segmentView = LayoutInflater.from(context).inflate(R.layout.item_storate_root_segment, hsvHouse, false);
         ImageView indicator = (ImageView) segmentView.findViewById(R.id.indicator);
         indicator.setImageResource(folderStateManager.getStorageItem().getStorageType() == StorageItem.TYPE_EXTERNAL ? R.drawable.ic_sd_storage : R.drawable.ic_hard_disk);
+        TintHelper.setTint(indicator, ATHUtil.resolveColor(context, android.R.attr.textColorPrimaryInverse));
         indicator.setAlpha(linkedFolders.size() == 0 ? 1f : .4f);
         hsvHouse.addView(segmentView);
         segmentView.setOnClickListener(new View.OnClickListener() {
@@ -353,6 +356,7 @@ class FolderPickerDialogHelper implements View.OnClickListener, FolderStateManag
 
         for (int i = 0; i < linkedFolders.size(); i++) {
             segmentView = LayoutInflater.from(context).inflate(R.layout.item_directory_segment, hsvHouse, false);
+            TintHelper.setTint((ImageView)segmentView.findViewById(R.id.indicator), ATHUtil.resolveColor(context, android.R.attr.textColorPrimaryInverse));
             segmentView.findViewById(R.id.indicator).setAlpha(.4f);
             TextView directoryTextView = (TextView) segmentView.findViewById(R.id.directory_name);
             if (linkedFolders.get(i).getName() == null || linkedFolders.get(i).getName().isEmpty()) {

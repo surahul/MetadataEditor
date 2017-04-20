@@ -27,7 +27,7 @@
         android:layout_marginLeft="10dp"
         android:textSize="16dp"
         android:ellipsize="end"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="?android:attr/textColorPrimaryInverse"
         tools:text="Videoder Test"
         />
 
