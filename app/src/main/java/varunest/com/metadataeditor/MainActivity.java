@@ -1,5 +1,6 @@
 package varunest.com.metadataeditor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.esafirm.imagepicker.features.ImagePicker;
+import com.esafirm.imagepicker.model.Image;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -19,8 +24,11 @@ import org.jaudiotagger.tag.FieldDataInvalidException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
+import org.jaudiotagger.tag.images.Artwork;
+import org.jaudiotagger.tag.images.ArtworkFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android_file.io.File;
 import varunest.com.metadataeditor.folderpicker.EventCallback;
@@ -28,6 +36,7 @@ import varunest.com.metadataeditor.folderpicker.FolderPickerConfig;
 import varunest.com.metadataeditor.folderpicker.FolderPickerDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final int REQUEST_CODE_PICKER = 0x12;
     // Views
     private View noContentView;
     private View infoContainer;
@@ -36,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView albumCover;
 
     private AudioFile audioFile;
+    private File newAlbumImage;
 
     private FolderPickerDialog.FolderSelectCallback folderSelectCallback = new FolderPickerDialog.FolderSelectCallback() {
         @Override
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     noContentView.setVisibility(View.GONE);
                     loadMetaDetailsInUI();
                     saveMetaButton.setVisibility(View.VISIBLE);
+                    newAlbumImage = null;
                 } catch (CannotReadException e) {
                     e.printStackTrace();
                     Toast.makeText(MainActivity.this, "CannotReadException", Toast.LENGTH_SHORT).show();
@@ -101,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         pickAudioButton.setOnClickListener(this);
         saveMetaButton.setOnClickListener(this);
+        albumCover.setOnClickListener(this);
     }
 
     private void loadMetaDetailsInUI() {
@@ -185,12 +197,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (FieldDataInvalidException | CannotWriteException | NumberFormatException e) {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
+                } catch (IOException e) {
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
+                break;
+
+            case R.id.audio_cover:
+                ImagePicker.create(this)
+                        .returnAfterFirst(true) // set whether pick or camera action should return immediate result or not. For pick image only work on single mode
+                        .folderMode(true) // folder mode (false by default)
+                        .folderTitle("Choose new Album Cover") // folder selection title
+                        .imageTitle("Tap to choose") // image selection title
+                        .single() // single mode
+                        .showCamera(true) // show camera or not (true by default)
+                        .imageDirectory("Camera") // directory name for captured image  ("Camera" folder by default)
+                        .start(REQUEST_CODE_PICKER); // start image picker activity with request code
                 break;
         }
     }
 
-    private void saveMetaInfoOfCurrentSelectedAudio() throws FieldDataInvalidException, CannotWriteException {
+    private void saveMetaInfoOfCurrentSelectedAudio() throws FieldDataInvalidException, CannotWriteException, IOException {
         if (audioFile != null) {
             Tag tag = audioFile.getTag();
             if (!audioName.getText().toString().isEmpty()) {
@@ -244,9 +271,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
+            if (newAlbumImage != null) {
+                try {
+                    Artwork artwork = ArtworkFactory.createArtworkFromFile(newAlbumImage.getWrappedFile());
+                    tag.setField(artwork);
+                } catch (IOException e) {
+                    throw new IOException("Failed to update album artwork.");
+                }
+            }
+
             audioFile.commit();
         } else {
             throw new IllegalStateException("AudioFile cannot be null while performing meta update operation");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PICKER && resultCode == RESULT_OK && data != null) {
+            ArrayList<Image> images = (ArrayList<Image>) ImagePicker.getImages(data);
+            if (images != null && images.size() == 1) {
+                newAlbumImage = new File(images.get(0).getPath());
+                Glide.with(MainActivity.this)
+                        .load(new File(newAlbumImage.getWrappedFile()).getWrappedFile()) // Uri of the picture
+                        .into(albumCover);
+            }
         }
     }
 }
