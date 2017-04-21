@@ -70,5 +70,5 @@ public interface Artwork
 
     public void setHeight(int height);
 
-    void setImage(Bitmap bitmap);
+    void setImageFromBitmap(Bitmap bitmap);
 }

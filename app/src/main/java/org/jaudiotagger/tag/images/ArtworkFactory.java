@@ -1,7 +1,8 @@
 package org.jaudiotagger.tag.images;
 
+import android.graphics.Bitmap;
+
 import org.jaudiotagger.audio.flac.metadatablock.MetadataBlockDataPicture;
-import org.jaudiotagger.tag.TagOptionSingleton;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,22 +10,11 @@ import java.io.IOException;
 /**
  * Get appropriate Artwork class
  */
-public class ArtworkFactory
-{
+public class ArtworkFactory {
 
 
-    public static Artwork getNew()
-    {
-        //Normal
-        if(!TagOptionSingleton.getInstance().isAndroid())
-        {
-            return new StandardArtwork();
-        }
-        //Android
-        else
-        {
-            return new AndroidArtwork();
-        }
+    public static Artwork getNew() {
+        return new StandardArtwork();
     }
 
     /**
@@ -33,18 +23,8 @@ public class ArtworkFactory
      * @param coverArt
      * @return
      */
-    public static Artwork createArtworkFromMetadataBlockDataPicture(MetadataBlockDataPicture coverArt)
-    {
-        //Normal
-        if(!TagOptionSingleton.getInstance().isAndroid())
-        {
-            return StandardArtwork.createArtworkFromMetadataBlockDataPicture(coverArt);
-        }
-        //Android
-        else
-        {
-            return AndroidArtwork.createArtworkFromMetadataBlockDataPicture(coverArt);
-        }
+    public static Artwork createArtworkFromMetadataBlockDataPicture(MetadataBlockDataPicture coverArt) {
+        return StandardArtwork.createArtworkFromMetadataBlockDataPicture(coverArt);
     }
 
     /**
@@ -54,18 +34,8 @@ public class ArtworkFactory
      * @return
      * @throws IOException
      */
-    public static Artwork createArtworkFromFile(File file) throws IOException
-    {
-        //Normal
-        if(!TagOptionSingleton.getInstance().isAndroid())
-        {
-            return StandardArtwork.createArtworkFromFile(file);
-        }
-        //Android
-        else
-        {
-            return AndroidArtwork.createArtworkFromFile(file);
-        }
+    public static Artwork createArtworkFromFile(File file) throws IOException {
+        return StandardArtwork.createArtworkFromFile(file);
     }
 
     /**
@@ -75,17 +45,12 @@ public class ArtworkFactory
      * @return
      * @throws IOException
      */
-    public static Artwork createLinkedArtworkFromURL(String link) throws IOException
-    {
+    public static Artwork createLinkedArtworkFromURL(String link) throws IOException {
         //Normal
-        if(!TagOptionSingleton.getInstance().isAndroid())
-        {
-            return StandardArtwork.createLinkedArtworkFromURL(link);
-        }
-        //Android
-        else
-        {
-            return AndroidArtwork.createLinkedArtworkFromURL(link);
-        }
+        return StandardArtwork.createLinkedArtworkFromURL(link);
+    }
+
+    public static Artwork createArtworkFromBitmap(Bitmap bitmap) {
+        return StandardArtwork.createArtWorkFromBitmap(bitmap);
     }
 }

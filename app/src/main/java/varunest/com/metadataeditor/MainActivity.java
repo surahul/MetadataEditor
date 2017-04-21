@@ -1,6 +1,8 @@
 package varunest.com.metadataeditor;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -27,8 +25,8 @@ import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import android_file.io.File;
 import varunest.com.metadataeditor.folderpicker.EventCallback;
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView albumCover;
 
     private AudioFile audioFile;
-    private File newAlbumImage;
+    private Bitmap newAlbumImage;
 
     private FolderPickerDialog.FolderSelectCallback folderSelectCallback = new FolderPickerDialog.FolderSelectCallback() {
         @Override
@@ -204,15 +202,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.album_change_button:
-                ImagePicker.create(this)
-                        .returnAfterFirst(true) // set whether pick or camera action should return immediate result or not. For pick image only work on single mode
-                        .folderMode(true) // folder mode (false by default)
-                        .folderTitle("Choose new Album Cover") // folder selection title
-                        .imageTitle("Tap to choose") // image selection title
-                        .single() // single mode
-                        .showCamera(true) // show camera or not (true by default)
-                        .imageDirectory("Camera") // directory name for captured image  ("Camera" folder by default)
-                        .start(REQUEST_CODE_PICKER); // start image picker activity with request code
+                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                getIntent.setType("image/*");
+
+                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickIntent.setType("image/*");
+
+                Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+
+                startActivityForResult(chooserIntent, REQUEST_CODE_PICKER);
                 break;
         }
     }
@@ -272,12 +271,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             if (newAlbumImage != null) {
-                try {
-                    Artwork artwork = ArtworkFactory.createArtworkFromFile(newAlbumImage.getWrappedFile());
-                    tag.setField(artwork);
-                } catch (IOException e) {
-                    throw new IOException("Failed to update album artwork.");
-                }
+                Artwork artwork = ArtworkFactory.createArtworkFromBitmap(newAlbumImage);
+                tag.deleteArtworkField();
+                tag.setField(artwork);
             }
 
             audioFile.commit();
@@ -290,12 +286,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_PICKER && resultCode == RESULT_OK && data != null) {
-            ArrayList<Image> images = (ArrayList<Image>) ImagePicker.getImages(data);
-            if (images != null && images.size() == 1) {
-                newAlbumImage = new File(images.get(0).getPath());
-                Glide.with(MainActivity.this)
-                        .load(new File(newAlbumImage.getWrappedFile()).getWrappedFile()) // Uri of the picture
-                        .into(albumCover);
+            try {
+                //Decode image size
+                BitmapFactory.Options optionsIn = new BitmapFactory.Options();
+                optionsIn.inJustDecodeBounds = true; // the trick is HERE, avoiding memory leaks
+                BitmapFactory.decodeStream(this.getContentResolver().openInputStream(data.getData()), null, optionsIn);
+
+                BitmapFactory.Options optionsOut = new BitmapFactory.Options();
+                int requiredWidth = 500;
+                float bitmapWidth = optionsIn.outWidth;
+                int scale = 1;
+                if (requiredWidth <= bitmapWidth) {
+                    scale = Math.round(bitmapWidth / requiredWidth);
+                }
+                optionsOut.inSampleSize = scale;
+                optionsOut.inPurgeable = true;//avoiding memory leaks
+                newAlbumImage = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(data.getData()), null, optionsOut);
+                albumCover.setImageBitmap(newAlbumImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

@@ -8,6 +8,7 @@ import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 import org.jaudiotagger.tag.reference.PictureTypes;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -198,7 +199,19 @@ public class StandardArtwork implements Artwork {
     }
 
     @Override
-    public void setImage(Bitmap bitmap) {
+    public void setImageFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] imageData = stream.toByteArray();
+        setBinaryData(imageData);
+        setMimeType(ImageFormats.getMimeTypeForBinarySignature(imageData));
+        setDescription("");
+        setPictureType(PictureTypes.DEFAULT_ID);
+    }
 
+    public static Artwork createArtWorkFromBitmap(Bitmap bitmap) {
+        StandardArtwork artwork = new StandardArtwork();
+        artwork.setImageFromBitmap(bitmap);
+        return artwork;
     }
 }

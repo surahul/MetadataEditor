@@ -40,7 +40,7 @@ public class StandardImageHandler implements ImageHandler
             Bitmap srcImage = artwork.getImage();
             int w = srcImage.getWidth();
             int newSize = w /2;
-            artwork.setImage(makeSmaller(artwork,newSize));
+            artwork.setImageFromBitmap(makeSmaller(artwork,newSize));
         }
     }
      /**
